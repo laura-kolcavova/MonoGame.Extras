@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="CppNet.dll" />
+    <None Remove="libmojoshader_64.dll" />
+    <None Remove="mgfxc.deps.json" />
+    <None Remove="mgfxc.dll" />
+    <None Remove="mgfxc.exe" />
+    <None Remove="mgfxc.pdb" />
+    <None Remove="mgfxc.runtimeconfig.dev.json" />
+    <None Remove="mgfxc.runtimeconfig.json" />
+    <None Remove="SharpDX.D3DCompiler.dll" />
+    <None Remove="SharpDX.D3DCompiler.xml" />
+    <None Remove="SharpDX.dll" />
+    <None Remove="SharpDX.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.Content.Pipeline.Portable" Version="3.7.1.189" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+</Project>
