@@ -10,7 +10,6 @@
         public AnimatedSpriteSystem() : base(Aspect
             .All(typeof(AnimatedSpriteComponent)))
         {
-
         }
 
         #endregion

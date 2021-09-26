@@ -4,7 +4,7 @@
     using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
     [ContentTypeWriter]
-    class JsonContentTypeWriter : ContentTypeWriter<JsonProcessorResult>
+    internal class JsonContentTypeWriter : ContentTypeWriter<JsonProcessorResult>
     {
         private string _runtimeType;
 

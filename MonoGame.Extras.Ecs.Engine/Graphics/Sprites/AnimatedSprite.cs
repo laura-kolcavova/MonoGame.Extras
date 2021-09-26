@@ -45,7 +45,7 @@
 
         public void Update(GameTime gameTime)
         {
-            if (_currentAnimation != null && !_currentAnimation.IsComplete)
+            if (_currentAnimation?.IsComplete == false)
             {
                 _currentAnimation.Update(gameTime);
                 TextureRegion = _currentAnimation.CurrentFrame;

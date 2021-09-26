@@ -12,9 +12,9 @@
 
     public class EventListener<TEvent> : IEventListener where TEvent : IEvent
     {
-        public ISystem System { get; private set; }
+        public ISystem System { get; }
 
-        public Type EventType { get; private set; }
+        public Type EventType { get; }
 
         public event Action<TEvent> Event;
 
@@ -22,8 +22,8 @@
         {
             System = system;
             EventType = typeof(TEvent);
-
         }
+
         public void Invoke(IEvent routedEvent)
         {
             Event?.Invoke((TEvent)routedEvent);

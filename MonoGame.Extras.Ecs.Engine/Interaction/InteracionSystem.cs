@@ -30,7 +30,6 @@
         private MouseState prev_mouseState;
         private MouseButtons[] current_pressedButtons;
         private MouseButtons[] prev_pressedButtons;
-        private int _draggingEntity;
         private Point _dragStartPosition;
 
         public override void Initialize(IComponentMapperService componentService)
@@ -126,8 +125,6 @@
 
                 if (interaction.IsDraggable)
                 {
-                    _draggingEntity = entityId;
-
                     var mousePosition =
                         _viewportAdapter == null ?
                         current_mouseState.Position : _viewportAdapter.PointToScreen(current_mouseState.Position);
@@ -147,7 +144,6 @@
             {
                 // Set Being Dragged Property
                 interaction.BeingDragged = false;
-                _draggingEntity = -1;
                 _dragStartPosition = Point.Zero;
 
                 interaction.TriggerEvent("DragEnd", BuildDragEvent(entityId));
@@ -174,7 +170,6 @@
             }
 
             // DragEnter
-
 
             // DragLeave
 
@@ -220,7 +215,6 @@
                 isHovered &&
                 current_pressedButtons.Length == 0 &&
                 prev_pressedButtons.Length > 0;
-
         }
 
         private bool CheckClick(bool beingPressed, bool isHovered)
@@ -279,18 +273,13 @@
 
         public bool IsEntityHovered(Transform2DComponent transform2D, Interaction2DComponent interaction2D, MouseState mouseState)
         {
-            var bounds = RectangleExtensions.Transform(interaction2D.Bounds, transform2D.WorldMatrix);
+            var bounds = interaction2D.Bounds.Transform(transform2D.WorldMatrix);
 
             var mousePosition =
                 _viewportAdapter == null ?
                 mouseState.Position : _viewportAdapter.PointToScreen(mouseState.Position);
 
             return bounds.Intersects(mousePosition);
-
-            //return mouseState.Position.X >= bounds.X &&
-            //       mouseState.Position.X <= bounds.X + bounds.Width &&
-            //       mouseState.Position.Y >= bounds.Y &&
-            //       mouseState.Position.Y <= bounds.Y + bounds.Height;
         }
 
         #endregion

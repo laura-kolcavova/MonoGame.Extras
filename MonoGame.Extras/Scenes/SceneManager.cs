@@ -1,57 +1,70 @@
-﻿namespace MonoGame.Extras.Scenes
+﻿// -----------------------------------------------------------------------
+// <copyright file="SceneManager.cs" company="Laura Kolcavova">
+// Copyright (c) Laura Kolcavova. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace MonoGame.Extras.Scenes
 {
     using Microsoft.Xna.Framework;
 
-    public interface ISceneManager
-    {
-        void LoadScene(IScene scene);
-        IScene GetActiveScene();
-    }
-
+    /// <summary>
+    /// Represents a manager for <see cref="IScene"/> instances.
+    /// </summary>
     public class SceneManager : DrawableGameComponent, ISceneManager
     {
-        private IScene _activeScene;
-        private IScene _prevScene;
+        private IScene activeScene;
+        private IScene prevScene;
 
-        public SceneManager(Game game) : base(game)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SceneManager"/> class.
+        /// </summary>
+        /// <param name="game">A <see cref="Game"/> instance.</param>
+        public SceneManager(Game game)
+            : base(game)
         {
-            _activeScene = null;
-            _prevScene = null;
+            activeScene = null;
+            prevScene = null;
         }
 
+        /// <inheritdoc/>
+        public IScene ActiveScene => activeScene;
+
+        /// <inheritdoc/>
         public void LoadScene(IScene scene)
         {
-            if (_activeScene != null)
+            if (activeScene != null)
             {
-                _prevScene = _activeScene;
-                _prevScene.Dispose();
-                _prevScene.UnloadContent();
+                prevScene = activeScene;
+                prevScene.Dispose();
+                prevScene.UnloadContent();
             }
 
-            _activeScene = scene;
+            activeScene = scene;
 
-            _activeScene.LoadContent();
+            activeScene.LoadContent();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            _activeScene.Dispose();
-            _activeScene.UnloadContent();
-        }
-
+        /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
-            _activeScene.Update(gameTime);
+            activeScene.Update(gameTime);
             base.Update(gameTime);
         }
 
+        /// <inheritdoc/>
         public override void Draw(GameTime gameTime)
         {
-            _activeScene.Draw(gameTime);
+            activeScene.Draw(gameTime);
             base.Draw(gameTime);
         }
 
-        public IScene GetActiveScene() => _activeScene;
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            activeScene.Dispose();
+            activeScene.UnloadContent();
+        }
     }
 }

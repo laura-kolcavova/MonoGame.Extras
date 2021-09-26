@@ -1,7 +1,7 @@
 ﻿namespace MonoGame.Extras.Ecs.Managers
 {
-    using DotNet.Extras.Collections;
     using Microsoft.Xna.Framework;
+    using MonoGame.Extras.Collections;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,7 +11,6 @@
         private const int _defaultBagSize = 128;
 
         private readonly World _world;
-        private readonly ComponentManager _componentManager;
 
         private readonly Bag<Entity> _entities;
         private readonly Bag<int> _addedEntities;
@@ -24,7 +23,7 @@
         public EntityManager(World world)
         {
             _world = world;
-            _componentManager = new ComponentManager();
+            ComponentManager = new ComponentManager();
 
             _entities = new Bag<Entity>(_defaultBagSize);
             _addedEntities = new Bag<int>(_defaultBagSize);
@@ -32,12 +31,12 @@
             _removedEntities = new Bag<int>(_defaultBagSize);
             _entityToComponentBits = new Bag<BitArray64>(_defaultBagSize);
 
-            _componentManager.ComponentsChanged += OnComponentsChanged;
+            ComponentManager.ComponentsChanged += OnComponentsChanged;
 
             _nextId = 0;
         }
 
-        internal ComponentManager ComponentManager => _componentManager;
+        internal ComponentManager ComponentManager { get; }
 
         public event Action<int> EntityAdded;
         public event Action<int> EntityChanged;
@@ -85,22 +84,25 @@
 
         public void Update(GameTime gameTime)
         {
-            foreach(int entityId in _addedEntities)
+            if (gameTime == null)
+                throw new ArgumentNullException(nameof(gameTime));
+
+            foreach (int entityId in _addedEntities)
             {
                 EntityAdded?.Invoke(entityId);
             }
 
-            foreach(int entityId in _changedEntities)
+            foreach (int entityId in _changedEntities)
             {
-                _entityToComponentBits[entityId] = _componentManager.CreateComponentBits(entityId);
+                _entityToComponentBits[entityId] = ComponentManager.CreateComponentBits(entityId);
                 EntityChanged?.Invoke(entityId);
             }
 
-            foreach(int entityId in _removedEntities)
+            foreach (int entityId in _removedEntities)
             {
                 _entities[entityId] = null;
                 _entityToComponentBits[entityId] = default;
-                _componentManager.DestroyComponents(entityId);
+                ComponentManager.DestroyComponents(entityId);
 
                 EntityRemoved?.Invoke(entityId);
             }
@@ -109,6 +111,5 @@
             _changedEntities.Clear();
             _removedEntities.Clear();
         }
-
     }
 }

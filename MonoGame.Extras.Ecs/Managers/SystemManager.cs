@@ -1,7 +1,7 @@
 ﻿namespace MonoGame.Extras.Ecs.Managers
 {
-    using DotNet.Extras.Collections;
     using Microsoft.Xna.Framework;
+    using MonoGame.Extras.Collections;
     using MonoGame.Extras.Ecs.Systems;
     using System;
 
@@ -56,7 +56,5 @@
             foreach (var drawSystem in _drawSystems)
                 drawSystem.Draw(gameTime);
         }
-
-
     }
 }

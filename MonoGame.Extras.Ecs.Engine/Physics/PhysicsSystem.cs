@@ -12,7 +12,6 @@
         public PhysicsSystem() : base(Aspect
             .All(typeof(Transform2DComponent), typeof(RigidBody2DComponent)))
         {
-
         }
 
         public override void Initialize(IComponentMapperService componentService)
@@ -30,14 +29,12 @@
                 var transform2D = _transform2DMapper.Get(entityId);
                 var physics2D = _physics2DMapper.Get(entityId);
 
-
                 if (physics2D.Velocity != Vector2.Zero)
                 {
                     transform2D.Position += physics2D.Velocity * delta;
                 }
             }
         }
-
 
         //public void MoveToPosition(Vector2 target, float speed)
         //{

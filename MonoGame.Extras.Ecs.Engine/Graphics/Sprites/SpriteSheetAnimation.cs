@@ -120,11 +120,13 @@
             {
                 if (IsReversed)
                 {
-                    frameIndex = frameIndex % length;
+                    frameIndex %= length;
                     frameIndex = length - frameIndex - 1;
                 }
                 else
-                    frameIndex = frameIndex % length;
+                {
+                    frameIndex %= length;
+                }
             }
             else
             {

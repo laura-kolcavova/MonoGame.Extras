@@ -23,8 +23,9 @@
             var world = new World();
 
             foreach (var system in _systems)
+            {
                 world.RegisterSystem(system);
-
+            }
 
             return world;
         }

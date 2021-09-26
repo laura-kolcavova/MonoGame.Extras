@@ -1,6 +1,6 @@
 ﻿namespace MonoGame.Extras.Ecs
 {
-    using DotNet.Extras.Collections;
+    using MonoGame.Extras.Collections;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -30,9 +30,9 @@
             _components = new Bag<IEntityComponent>();
         }
 
-        public int Id { get; private set; }
+        public int Id { get; }
 
-        public Type ComponentType { get; private set; }
+        public Type ComponentType { get; }
 
         public IEnumerable<TComponent> Components => _components.Where(c => c != null).Cast<TComponent>();
 

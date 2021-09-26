@@ -25,9 +25,4 @@
     <ProjectReference Include="..\MonoGame.Extras.Ecs\MonoGame.Extras.Ecs.csproj" />
     <ProjectReference Include="..\MonoGame.Extras\MonoGame.Extras.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="DotNet.Extras.Collections">
-      <HintPath>..\DotNet.Extras.Collections.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>

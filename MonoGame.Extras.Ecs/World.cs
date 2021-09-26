@@ -7,24 +7,22 @@
 
     public sealed class World : IDisposable
     {
-        private readonly EntityManager _entityManager;
-        private readonly EntityGroupManager _groupManager;
         private readonly SystemManager _systemManager;
 
         internal World()
         {
-            _entityManager = new EntityManager(this);
-            _groupManager = new EntityGroupManager(_entityManager);
+            EntityManager = new EntityManager(this);
+            GroupManager = new EntityGroupManager(EntityManager);
             _systemManager = new SystemManager();
         }
 
-        internal EntityManager EntityManager => _entityManager;
+        internal EntityManager EntityManager { get; }
 
-        internal ComponentManager ComponentManager => _entityManager.ComponentManager;
+        internal ComponentManager ComponentManager => EntityManager.ComponentManager;
 
-        public IComponentMapperService ComponentMapperService => _entityManager.ComponentManager;
+        public IComponentMapperService ComponentMapperService => EntityManager.ComponentManager;
 
-        public EntityGroupManager GroupManager => _groupManager;
+        public EntityGroupManager GroupManager { get; }
 
         internal void RegisterSystem(ISystem system)
         {
@@ -35,17 +33,17 @@
 
         public Entity GetEntity(int entityId)
         {
-            return _entityManager.GetEntity(entityId);
+            return EntityManager.GetEntity(entityId);
         }
 
         public Entity CreateEntity()
         {
-            return _entityManager.Create();
+            return EntityManager.Create();
         }
 
         public void DestroyEntity(int entityId)
         {
-            _entityManager.Destroy(entityId);
+            EntityManager.Destroy(entityId);
         }
 
         public void Dispose()
@@ -55,7 +53,7 @@
 
         public void Update(GameTime gameTime)
         {
-            _entityManager.Update(gameTime);
+            EntityManager.Update(gameTime);
             _systemManager.Update(gameTime);
         }
 

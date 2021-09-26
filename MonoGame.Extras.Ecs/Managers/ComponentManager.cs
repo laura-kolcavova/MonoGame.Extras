@@ -1,6 +1,6 @@
 ﻿namespace MonoGame.Extras.Ecs.Managers
 {
-    using DotNet.Extras.Collections;
+    using MonoGame.Extras.Collections;
     using System;
     using System.Collections.Generic;
     using System.Linq;

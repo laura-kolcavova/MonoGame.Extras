@@ -48,8 +48,7 @@
         public Rectangle GetBoundingRectangle(Transform2D transform2D)
         {
             var rectBody = new Rectangle(Offset.ToPoint(), Size.ToPoint());
-
-            return RectangleExtensions.Transform(rectBody, transform2D.WorldMatrix);
+            return rectBody.Transform(transform2D.WorldMatrix);
         }
 
         #endregion

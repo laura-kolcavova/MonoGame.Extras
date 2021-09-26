@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DotNet.Extras.Collections;
+    using MonoGame.Extras.Collections;
     using MonoGame.Extras.Ecs.Systems;
 
     public interface IEventManager
@@ -17,8 +17,8 @@
 
     public sealed class EventManager : IEventManager
     {
-        private Bag<IEvent> _eventQueue;
-        private Dictionary<Type, Bag<IEventListener>> _eventListeners;
+        private readonly Bag<IEvent> _eventQueue;
+        private readonly Dictionary<Type, Bag<IEventListener>> _eventListeners;
 
         public EventManager()
         {
@@ -60,7 +60,6 @@
             }
 
             eventListener.Event += listener;
-
         }
 
         public void Unsubscribe<TEvent>(ISystem system, Action<TEvent> listener) where TEvent : IEvent
@@ -81,7 +80,7 @@
                 {
                     var type = routedEvent.GetType();
 
-                    if (_eventListeners.Any())
+                    if (_eventListeners.Count > 0)
                     {
                         foreach (var eventListener in _eventListeners[type])
                         {

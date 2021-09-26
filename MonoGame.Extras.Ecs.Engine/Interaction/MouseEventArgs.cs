@@ -1,4 +1,4 @@
-﻿namespace MonoGame.Extras.Interaction
+﻿namespace MonoGame.Extras.Ecs.Engine.Interaction
 {
     using Microsoft.Xna.Framework.Input;
     using MonoGame.Extras.Input;
