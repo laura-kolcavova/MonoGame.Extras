@@ -1,9 +1,8 @@
-﻿namespace MonoGame.Extras.Graphics
+﻿namespace MonoGame.Extras.Ecs.Engine.Graphics
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using MonoGame.Extras.Math;
-    using MonoGame.Extras.Physics;
+    using MonoGame.Extras.Ecs.Engine.Physics;
 
     public class Renderer2D
     {
@@ -44,7 +43,7 @@
 
         #region Public Methods
 
-        public Rectangle GetBoundingRectangle(Transform2D transform2D)
+        public Rectangle GetBoundingRectangle(Transform2DComponent transform2D)
         {
             var rectBody = new Rectangle(Offset.ToPoint(), Size.ToPoint());
 

@@ -151,6 +151,12 @@
             Position = position - new Vector2(viewportAdapter.VirtualWidth / 2f, viewportAdapter.VirtualHeight / 2f);
         }
 
+        /// <summary>
+        /// Calculates position as world to screen.
+        /// </summary>
+        /// <param name="x">X position.</param>
+        /// <param name="y">Y position.</param>
+        /// <returns>Calculated position as world to screen.</returns>
         public Vector2 WorldToScreen(float x, float y)
         {
             return WorldToScreen(new Vector2(x, y));
@@ -163,6 +169,12 @@
             return Vector2.Transform(worldPosition + new Vector2(viewport.X, viewport.Y), GetViewMatrix());
         }
 
+        /// <summary>
+        /// Calculates position as screen to world.
+        /// </summary>
+        /// <param name="x">X position.</param>
+        /// <param name="y">Y position.</param>
+        /// <returns>Calculated position as screen to world.</returns>
         public Vector2 ScreenToWorld(float x, float y)
         {
             return ScreenToWorld(new Vector2(x, y));
@@ -177,6 +189,11 @@
                 Matrix.Invert(GetViewMatrix()));
         }
 
+        /// <summary>
+        /// Gets new created view matrix.
+        /// </summary>
+        /// <param name="parallaxFactor">Parallax factor.</param>
+        /// <returns>New <see cref="Matrix"/> instance.</returns>
         public Matrix GetViewMatrix(Vector2 parallaxFactor)
         {
             return GetVirtualViewMatrix(parallaxFactor) * viewportAdapter.GetScaleMatrix();
@@ -202,6 +219,11 @@
             return new BoundingFrustum(projectionMatrix);
         }
 
+        /// <summary>
+        ///  Gets <see cref="ContainmentType"/>.
+        /// </summary>
+        /// <param name="point">The <see cref="Point"/> object.</param>
+        /// <returns><see cref="ContainmentType"/>.</returns>
         public ContainmentType Contains(Point point)
         {
             return Contains(point.ToVector2());

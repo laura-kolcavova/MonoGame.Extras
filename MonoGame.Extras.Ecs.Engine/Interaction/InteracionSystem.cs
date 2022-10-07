@@ -3,12 +3,10 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
     using System;
-    using MonoGame.Extras.Math;
     using MonoGame.Extras.Input;
     using MonoGame.Extras.Ecs.Systems;
     using MonoGame.Extras.ViewportAdapters;
     using MonoGame.Extras.Ecs.Engine.Physics;
-    using MonoGame.Extras.Interaction;
 
     public class InteractionSystem : EntitySystem, IUpdateSystem
     {

@@ -1,7 +1,6 @@
 ﻿namespace MonoGame.Extras.Ecs.Engine.Physics
 {
     using Microsoft.Xna.Framework;
-    using MonoGame.Extras.Math;
 
     /// <summary>
     /// Represents a 2D transform component.

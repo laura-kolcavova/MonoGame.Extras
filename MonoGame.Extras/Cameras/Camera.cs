@@ -90,7 +90,7 @@
         /// Calculates position as screen to world.
         /// </summary>
         /// <param name="screenPosition">A screen position.</param>
-        /// <returns>Calculated position as world to screen.</returns>
+        /// <returns>Calculated position as screen to world.</returns>
         public abstract T ScreenToWorld(T screenPosition);
 
         /// <summary>

@@ -17,7 +17,9 @@ namespace MonoGame.Extras.Tools
         /// <summary>
         /// Gets maximum samples count.
         /// </summary>
-        public const int MAXIMUM_SAMPLES = 100;
+        public const int MaximumSamples = 100;
+
+        private readonly Queue<float> sampleBuffer = new Queue<float>();
 
         /// <summary>
         /// Gets total frames count.
@@ -39,8 +41,6 @@ namespace MonoGame.Extras.Tools
         /// </summary>
         public float CurrentFramesPerSecond { get; private set; }
 
-        private readonly Queue<float> sampleBuffer = new Queue<float>();
-
         /// <summary>
         /// Updates frame counter.
         /// </summary>
@@ -51,7 +51,7 @@ namespace MonoGame.Extras.Tools
 
             sampleBuffer.Enqueue(CurrentFramesPerSecond);
 
-            if (sampleBuffer.Count > MAXIMUM_SAMPLES)
+            if (sampleBuffer.Count > MaximumSamples)
             {
                 sampleBuffer.Dequeue();
                 AverageFramesPerSecond = sampleBuffer.Average(i => i);
